@@ -14,7 +14,9 @@ switch($type){
         print_r($results);
         break;
     case 'delete':
-        print_r('delete later');
+        $id=$_REQUEST['id'];
+        $users_dao->delete($id);
+        
         break;
     case 'get':
     default;
@@ -22,7 +24,13 @@ switch($type){
         print_r($results);
         break;
     case 'update':
-        print_r('update_later');
+        $first_name=$_REQUEST['first_name'];
+        $last_name=$_REQUEST['last_name'];
+        $id=$_REQUEST['id'];
+        $users_dao->update($first_name, $last_name, $id);
+        
+        
+    
         break;
 
 
