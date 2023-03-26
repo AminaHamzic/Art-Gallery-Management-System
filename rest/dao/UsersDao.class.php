@@ -51,8 +51,8 @@ public function add($first_name, $last_name){
  method to update users to db
  */
 public function update($first_name, $last_name, $id){
-    $stmt=$this->connection->prepare("UPDATE users SET first_name='$first_name', last_name='$last_name' WHERE id=$id");
-    $stmt-> execute();
+    $stmt=$this->connection->prepare("UPDATE users SET first_name=':first_name', last_name=':last_name' WHERE id=:id");
+    $stmt-> execute(['first_name'=> $first_name, 'last_name'=> $last_name , 'id'=>$id]);
 
 
 }
@@ -61,8 +61,9 @@ public function update($first_name, $last_name, $id){
  method to delete users to db
  */
 public function delete($id){
-    $stmt=$this->connection->prepare("DELETE FROM users WHERE id=$id");
-    $stmt-> execute();
+    $stmt=$this->connection->prepare("DELETE FROM users WHERE id= :id");
+    $stmt->bindParam(':id', $id); //prevent SQL injection
+    $stmt->execute();
 }
 
 
