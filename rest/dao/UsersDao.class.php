@@ -42,7 +42,7 @@ public function get_all(){
 public function add($first_name, $last_name){
     $stmt=$this->connection->prepare("INSERT INTO users(first_name, last_name) VALUES ('$first_name', '$last_name')");
     $stmt->execute();
-    return $stmt-> fetchAll(PDO::FETCH_ASSOC);
+    return $stmt-> fetchAll(PDO:: FETCH_ASSOC);
 
 
 }
