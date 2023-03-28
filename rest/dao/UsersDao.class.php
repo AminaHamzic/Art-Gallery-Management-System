@@ -39,10 +39,11 @@ public function get_all(){
 /*
  method to add users to db
  */
-public function add($first_name, $last_name){
-    $stmt=$this->connection->prepare("INSERT INTO users(first_name, last_name) VALUES ('$first_name', '$last_name')");
-    $stmt->execute();
-    return $stmt-> fetchAll(PDO:: FETCH_ASSOC);
+public function add($user){
+    $stmt=$this->connection->prepare("INSERT INTO users(first_name, last_name) VALUES (:first_name, :last_name)");
+    $stmt->execute($user);
+    $user['id']=$this->connection->lastInsertId(); //id of last inserted record
+    return $user;
 
 
 }
@@ -50,9 +51,12 @@ public function add($first_name, $last_name){
 /*
  method to update users to db
  */
-public function update($first_name, $last_name, $id){
-    $stmt=$this->connection->prepare("UPDATE users SET first_name=':first_name', last_name=':last_name' WHERE id=:id");
-    $stmt-> execute(['first_name'=> $first_name, 'last_name'=> $last_name , 'id'=>$id]);
+public function update($user, $id){
+    $user['id']=$id;
+    $stmt=$this->connection->prepare("UPDATE users SET first_name=:first_name, last_name=:last_name WHERE id=:id");
+    $stmt-> execute($user);
+    return $user;
+
 
 
 }
