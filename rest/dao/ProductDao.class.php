@@ -1,7 +1,6 @@
 <?php
 
-
-require_once"BaseDao.class.php";
+require_once "BaseDao.class.php";
 
 class ProductDao extends BaseDao
 {
@@ -12,10 +11,7 @@ class ProductDao extends BaseDao
   
     }
 
-    public function get_all(){
-        return parent::get_all();
-    }
-
+  
 
 }
 ?>

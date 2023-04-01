@@ -1,100 +1,96 @@
 <?php
+require_once __DIR__."/../Config.class.php";
+ class BaseDao {
+    private $conn; 
 
-class BaseDao{
-    private $connection;
-
-    private $tabel_name;
+    private $table_name;
 
     /**
-     * Class constructor used to establish connection to db
-     */
-
-    public function __construct($tabel_name){
-        $this->tabel_name=$tabel_name;
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-
+    * Class constructor used to establish connection to db
+    */
+    public function __construct($table_name){
         try {
-            $this->connection = new PDO("mysql:host=$servername;dbname=art-gallery", $username, $password);
-            // set the PDO error mode to exception
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //echo "Connected successfully";
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }}
+          $this->table_name = $table_name;
+          $servername = Config::DB_HOST();
+          $username = Config::DB_USERNAME();
+          $password = Config::DB_PASSWORD();
+          $schema = Config::DB_SCHEMA();;
+          $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
+          // set the PDO error mode to exception
+          $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          //echo "Connected successfully";
+        } catch(PDOException $e) {
+          echo "Connection failed: " . $e->getMessage();
+        }
+    }
+
+    /**
+    * Method used to get all entities from database
+    */
+    public function get_all(){
+        $stmt = $this->conn->prepare("SELECT * FROM " . $this->table_name);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+    * Method used to get entity by id from database
+    */
+    public function get_by_id($id){
+        $stmt = $this->conn->prepare("SELECT * FROM " . $this->table_name . " WHERE id=:id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
+
+    /**
+    * Method used to get add entity to database
+    * string $first_name: First name is the first name of the course
+    */
+    public function add($entity){
+        $query = "INSERT INTO " . $this->table_name . " (";
+        foreach($entity as $column => $value){
+            $query.= $column . ', ';
+        }
+        $query = substr($query, 0, -2);
+        $query.= ") VALUES (";
+        foreach($entity as $column => $value){
+            $query.= ":" . $column . ', ';
+        }
+        $query = substr($query, 0, -2);
+        $query.= ")";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($entity);
+        $entity['id'] = $this->conn->lastInsertId();
+        return $entity;
+    }
+
     
-
-
-/*
- method to get all entities from db
- */
-public function get_all(){
-    $stmt=$this->connection->prepare("SELECT * FROM " . $this->$tabel_name);
-    $stmt->execute();
-    return $stmt-> fetchAll(PDO::FETCH_ASSOC);
-}
-
-/**
- * Method to get entity by id
- */
-public function get_by_id($id){
-    $stmt=$this->connection->prepare("SELECT * FROM " . $this->$tabel_name . " WHERE id=:id");
-    $stmt->execute(['id'=> $id]);
-    return $stmt-> fetch(PDO::FETCH_ASSOC); //if we put fetchAll it will return ascc array
-}
-
-/*
- method used to delete enitiy from db
- */
-public function delete($id){
-    $stmt=$this->connection->prepare("DELETE FROM " . $this->$tabel_name . " WHERE id= :id");
-    $stmt->bindParam(':id', $id); //prevent SQL injection
-    $stmt->execute();
-}
-
-
-/*
- method used to add eintities to db
- */
-public function add($entity){
-    $query="INSER INTO " . $this->$tabel_name . " (";
-    foreach($entity as $column => $value){
-        $query.= $column . ", ";
+    /**
+    * Method used to update entity in database
+    */
+    public function update($entity, $id, $id_column = "id"){
+        $query = "UPDATE " . $this->table_name . " SET ";
+        foreach($entity as $column => $value){
+            $query.= $column . "=:" . $column . ", ";
+        }
+        $query = substr($query, 0, -2);
+        $query.= " WHERE ${id_column} = :id";
+        $stmt = $this->conn->prepare($query);
+        $entity['id'] = $id;
+        $stmt->execute($entity);
+        return $entity;
     }
-    $query=substr($query, 0, -2);//deleting comma and space at the end
-    $query.=") VALUES (";
-    foreach($entity as $column => $value){
-        $query.= ":" . $column . ", ";
+
+
+    /**
+    * Method used to delete entity from database
+    */
+    public function delete($id){
+        $stmt = $this->conn->prepare("DELETE FROM " . $this->table_name . " WHERE id = :id");
+        $stmt->bindParam(':id', $id); #prevent SQL injection
+        $stmt->execute();
     }
-    $query=substr($query, 0, -2); 
-    $query.=")";
-
-    $stmt=$this->connection->prepare($query);
-    $stmt->execute($entity);
-    $entity['id']=$this->connection->lastInsertId(); //id of last inserted record
-    return $entity;
-
-}
-
-/*
- method used to update entities to db
- */
-public function update($entity, $id, $id_column="id"){
-    $query="UPDATE " . $this->$tabel_name . "SET ";
-    foreach($entity as $column => $value){
-        $query.= $column . "=:" . $column . ", ";
-    }
-    $query=substr($query, 0, -2); 
-    $query.=" WHERE ${id_column} = :id";
-    $entity['id']=$id;
-    $stmt=$this->connection->prepare($query);
-    //$stmt=$this->connection->prepare("UPDATE users SET first_name=:first_name, last_name=:last_name WHERE id=:id");
-    $stmt-> execute($entity);
-    return $entity;
-}
-
-
-}
+ }
 
 ?>
