@@ -1,33 +1,23 @@
 <?php
 //route calls the service and service calls dao
-class UserService{
-    private $user_dao;
+require"BaseService.php";
 
+
+class UserService extends BaseService{
     public function __construct(){
-        $this->$user_dao=new UserDao();
-
-
-    }
-
-    public function get_all(){
-        return $this->$user_dao->get_all();
-    }
-
-    public function get_by_id($id){
-        return $this->$user_dao->get_by_id($id);
+        parent::__construct(new UserDao);
     }
 
     public function add($entitiy){
-        return $this->$user_dao->add($entitiy);
+        parent::add($entitiy);
+        //send email
+        /*if("validateField($entitiy['first_name'])){
+            error
+        }*/
+
     }
 
-    public function update($user, $id){
-        return $this->$user_dao->update($user, $id);
-    }
 
-    public function delete($id){
-        return $this->$user_dao->delete($id);
-    }
 }
 
 ?>
