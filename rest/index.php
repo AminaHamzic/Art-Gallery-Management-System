@@ -1,11 +1,17 @@
 <?php
 
-require "../vendor/autoload.php";
-require "dao/UserDao.class.php";
-require "dao/ProductDao.class.php";
 
-Flight:: register('user_dao', "UserDao");
-Flight:: register('product_dao', "ProductDao");
+/**
+ * Import files from services and register them, because route calls service
+ */
+
+require "../vendor/autoload.php";
+require "services/UserService.class.php";
+require "services/ProductService.class.php";
+
+
+Flight:: register('user_service', "UserService");
+Flight:: register('product_service', "ProductService");
 
 
 require_once 'routes/UserRoutes.php';
@@ -14,6 +20,7 @@ require_once 'routes/ProductRoutes.php';
 
 
 Flight:: start();
-//28:20 video1
+
 
 ?>
+ 
