@@ -1,4 +1,4 @@
 vendor
 oldIndex.php
 OldUsersDao.class.php
-Config.class.php
+rest/Config.class.php
