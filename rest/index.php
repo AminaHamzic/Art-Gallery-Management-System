@@ -14,5 +14,8 @@ Flight::register('product_service', "ProductService");
 require_once 'routes/UserRoutes.php';
 require_once 'routes/ProductRoutes.php';
 
+Flight:: route('/', function(){
+    echo 'Hello world!';
+});
 Flight::start();
 ?>
