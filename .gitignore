@@ -2,3 +2,6 @@ vendor
 oldIndex.php
 OldUsersDao.class.php
 rest/Config.class.php
+db.php
+insert.php
+op.php

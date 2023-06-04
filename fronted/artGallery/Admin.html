@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery Managment System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    
+    
+
+    
+</head>
+<body>
+  
+<script src="js/script.js" type="module"></script>
+        
+        <script>
+            const menuButton = document.querySelector('.menu-button');
+            const navLinks = document.querySelector('.nav-links');
+            menuButton.addEventListener('click', () => {
+                navLinks.classList.toggle('mobile-menu');
+            }); 
+        </script>
+
+  
+  <section>
+    
+    <header>
+    <!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="logo-container">
+    <img src="./assets/logoRed.png" class="logo">
+  </div>
+  
+  <ul class="nav-links">
+    <li class="active"><a href="index.html">Home</a></li>
+    <li class="active"><a href="About Us.html">About Us</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-link active">Artwork</a>
+      <ul class="dropdown-menu active">
+        <li><a href="Artwork_All.html">All</a></li>
+        <li><a href="Painting.html">Paintings</a></li>
+        <li><a href="PopArt.html">Pop Art</a></li>
+        <li><a href="Sculpture.html">Sculpture</a></li>
+        
+        
+      </ul>
+    </li>
+    
+    <li class="active"><a href="Admin.html">Admin</a></li>
+  </ul>
+  <div class="search">
+    <input type="text" placeholder="Search">
+    <button>Search</button>
+  </div>
+  <img src="./assets/IconMenu.png" alt="" class="menu-button">
+</nav>
+
+    </header>
+
+    </section>
+    
+    <!-- Login Form -->
+<div class="container-login">
+  <div class="forms">
+    <div class="form login">
+      <span class="title">Login</span>
+
+      <form action="Admin_dashboard.html">
+        <div class="input-field">
+          <input type="text" placeholder="Enter your email address" required>
+          <i class="uil uil-envelope icon"></i>
+        </div>
+
+        <div class="input-field">
+          <input type="password" placeholder="Enter your password" required>
+          <i class="uil uil-lock icon"></i>
+          <i class="uil uil-eye-slash showHidePW"></i>
+        </div>
+
+        <a href="#" class="text" id="forgot-password-link">Forgot Password?</a>
+        <div class="input-field button">
+          <input type="button" value="Login" id="login-button">
+        </div>
+      </form>
+
+      <div class="login-signup">
+        <span class="text">Don't have an account? <a href="#" class="signup-text" id="signup-link">Sign Up</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Registration Form -->
+<div class="container-registration">
+  <div class="forms">
+    <div class="form registration">
+      <span class="title">Registration</span>
+
+      <form action="Admin_dashboard.html">
+        <div class="input-field">
+          <input type="text" placeholder="Enter your email address" required>
+          <i class="uil uil-envelope icon"></i>
+        </div>
+
+        <div class="input-field">
+          <input type="password" placeholder="Enter your password" required>
+          <i class="uil uil-lock icon"></i>
+          <i class="uil uil-eye-slash showHidePW"></i>
+        </div>
+
+        <div class="input-field">
+          <input type="password" placeholder="Confirm your password" required>
+          <i class="uil uil-lock icon"></i>
+          <i class="uil uil-eye-slash showHidePW"></i>
+        </div>
+
+        <div class="input-field button">
+          <input type="button" value="Register" id="register-button">
+        </div>
+      </form>
+
+      <div class="login-signup">
+        <span class="text">Already have an account? <a href="#" class="login-text" id="login-link">Log In</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+        
+    
+
+  
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+  
+  <footer class="footer">
+    <div class="footer-row">
+      <div class="footer-logo">
+        <img src="./assets/logoRed.png" class="logo">
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="footer-contact">
+        <img src="./assets/round-phone-24pxPhone.png" alt="Phone Icon" class="footer-icon">
+        <p>+38762 345 678</p>
+      </div>
+      <div class="footer-contact">
+        <img src="./assets/round-place-24pxPlacePin.png" alt="Address Icon" class="footer-icon">
+        <p>Stret of Sarajevo 234</p>
+      </div>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
