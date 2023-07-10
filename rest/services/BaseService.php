@@ -1,7 +1,7 @@
 <?php
 
 class BaseService {
-    private $dao;
+    protected $dao;
    
     public function __construct($dao){
         $this->dao = $dao;
@@ -26,6 +26,17 @@ class BaseService {
     public function delete($id){
         return $this->dao->delete($id);
     }
+
+    public function getProductsFromCategory($category_id){
+        return $this->dao->getProductsFromCategory($category_id);
+    }
+
+
+
+   
+  
+
+
 }
 
 ?>

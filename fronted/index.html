@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery Managment System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <!-- SPApp CSS -->
+    <link href="css/jQuerySPApp.css" rel="stylesheet">
+    
+     <!-- SPApp JS -->
+     <script src="js/jQuerySPApp.js"></script>
+
+    
+
+</head>
+<body>
+  
+
+    <section>
+    
+    <header>
+    <!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="logo-container">
+    <img src="./assets/logoRed.png" class="logo">
+    
+  </div>
+  
+  <ul class="nav-links">
+    <li class="active"><a href="#home">Home</a></li>
+    <li class="active"><a href="#about">About Us</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-link active">Artwork</a>
+      <ul class="dropdown-menu active">
+        <li><a href="#artwork">All</a></li>
+        <li><a href="#painting">Paintings</a></li>
+        <li><a href="#popart">Pop Art</a></li>
+        <li><a href="#sculpture">Sculpture</a></li>
+        
+        
+      </ul> 
+    </li>
+    
+    <li class="active"><a href="#admin">Admin</a></li>
+  </ul>
+  <div class="search">
+    <input type="text" placeholder="Search">
+    <button>Search</button>
+  </div>
+
+  <button class="menu-toggle"><img src="./assets/IconMenu.png" alt=""></button>
+ 
+</nav>
+
+    </header>
+
+    </section>
+
+    <main id="jqueryspapp" role="main">
+      <section id="home" data-load="home.html"></section>
+      <section id="about" data-load="About_Us.html"></section>
+      <section id="artwork" data-load="Artwork_All.html"></section>
+      <section id="painting" data-load="Painting.html"></section>
+      <section id="popart" data-load="PopArt.html"></section>
+      <section id="sculpture" data-load="Sculpture.html"></section>
+      <section id="admin" data-load="Admin.html"></section>
+      <section id="inquire" data-load="inquire.html"></section>
+      <section id="logInAdmin" data-load="logIn.html"></section>
+      
+     
+    </main>
+    
+
+
+
+    
+
+  </div>
+  <footer class="footer">
+    <div class="footer-row">
+      <div class="footer-logo">
+        <img src="./assets/logoRed.png" class="logo">
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="footer-contact">
+        <img src="./assets/round-phone-24pxPhone.png" alt="Phone Icon" class="footer-icon">
+        <p>+38762 345 678</p>
+      </div>
+      <div class="footer-contact">
+        <img src="./assets/round-place-24pxPlacePin.png" alt="Address Icon" class="footer-icon">
+        <p>Stret of Sarajevo 234</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+      var userType = localStorage.getItem("userType"); // Retrieve the userType from local storage.
+      var defaultView = userType === "admin" ? "adminIndex" : "home"; // Set defaultView based on userType.
+
+      var app = $.jQuerySPApp({defaultView : defaultView}); 
+
+      app.route({view : "home", load : "home.html"});
+      app.route({view : "inquire", load : "inquire.html"});
+      app.route({view : "about", load : "About_Us.html"});
+      app.route({view : "artwork", load : "Artwork_All.html"});
+      app.route({view : "painting", load : "Painting.html"});
+      app.route({view : "popart", load : "PopArt.html"});
+      app.route({view : "sculpture", load : "Sculpture.html"});
+      app.route({view : "admin", load : "Admin.html"});
+      app.route({view : "profile", load : "profile.html"});
+      app.route({view : "logInAdmin", load : "logIn.html"});
+      app.route({view : "adminIndex", load : "adminIndex.html"}); // Route for the adminIndex
+
+      app.run();
+    });
+</script>
+
+     
+  </script>
+
+
+</body>
+
+</html>

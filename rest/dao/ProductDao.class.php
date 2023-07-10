@@ -11,6 +11,14 @@ class ProductDao extends BaseDao
   
     }
 
+    public function getProductsFromCategory($category_id){
+        $stmt = $this->conn->prepare("SELECT * FROM products
+        WHERE category_id = :category_id");
+        $stmt->bindParam(':category_id', $category_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
   
 
 }

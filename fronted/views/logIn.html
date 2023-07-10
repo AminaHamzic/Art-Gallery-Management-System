@@ -1,0 +1,34 @@
+<!-- Login Form -->
+<body style="display:none;">
+<div class="container-login">
+    <div class="forms">
+      <div class="form login">
+        <span class="title">Login</span>
+  
+        <form id="login-form" action="#admin_dashboard">
+          <div class="input-field">
+            <input type="text" id="login-email" placeholder="Enter your email address" required>
+            <i class="uil uil-envelope icon"></i>
+          </div>
+        
+          <div class="input-field">
+            <input type="password" id="login-password" placeholder="Enter your password" required>
+            <i class="uil uil-lock icon"></i>
+            <i class="uil uil-eye-slash showHidePW"></i>
+          </div>
+        
+          <a href="#" class="text" id="forgot-password-link">Forgot Password?</a>
+          <div class="input-field button">
+            
+            <button id="login-link" onclick="Login.login();" class="cta">Login</button>
+          </div>
+        </form>
+  
+        <div class="login-signup">
+          <span class="text">Don't have an account? <li><a href="#admin">SignUp /</a></li></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

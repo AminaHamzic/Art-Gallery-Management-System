@@ -1,12 +1,11 @@
 <?php
 require_once "BaseDao.class.php";
 
-class ArtistDao extends BaseDao {
+class InquiriesDao extends BaseDao {
 
     public function __construct(){
-        parent::__construct("artist");
+        parent::__construct("inquiries");
     }
-
 
 }
 ?>

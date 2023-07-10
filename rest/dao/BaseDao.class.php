@@ -44,7 +44,7 @@ require_once __DIR__."/../Config.class.php";
 
     /**
     * Method used to get add entity to database
-    * string $first_name: First name is the first name of the course
+    * string $first_name: First name is the first name of the 
     */
     public function add($entity){
         $query = "INSERT INTO " . $this->table_name . " (";
@@ -91,6 +91,16 @@ require_once __DIR__."/../Config.class.php";
         $stmt->bindParam(':id', $id); #prevent SQL injection
         $stmt->execute();
     }
+
+    public function get_user_by_email($email){
+        $stmt = $this->conn->prepare("SELECT *  FROM user  WHERE email = :email LIMIT 1");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+    
+
+    
  }
 
 ?>

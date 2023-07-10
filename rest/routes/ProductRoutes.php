@@ -31,13 +31,14 @@ Flight::route("GET /products", function(){
                  ]);
  });
  
- Flight::route("GET /products/@name", function($name){
-    echo "Hello from /products route with name= ".$name;
- });
  
- Flight::route("GET /products/@name/@status", function($name, $status){
-    echo "Hello from /products route with name = " . $name . " and status = " . $status;
- });
+
+ Flight::route("GET /products/category/@category_id", function($category_id){
+    Flight::json(Flight::product_service()->getProductsFromCategory($category_id));
+   
+});
+
+   
 
 ?>
 

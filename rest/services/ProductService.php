@@ -8,6 +8,9 @@ class ProductService extends BaseService{
     public function __construct(){
         parent::__construct(new ProductDao);
     }
+
+    
+
 }
 
 ?>

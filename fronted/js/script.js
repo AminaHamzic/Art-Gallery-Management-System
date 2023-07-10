@@ -26,6 +26,16 @@ dropdownLinks.forEach((link) => {
   });
 });
 
+
+
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('nav-active');
+});
+
+
  // Move between Login and Registration forms
  const loginForm = document.querySelector('.container-login');
  const registrationForm = document.querySelector('.container-registration');
@@ -72,6 +82,30 @@ document.getElementById('profile-form').addEventListener('submit', function(even
   }
 });
 
+
 document.getElementById('messageForm').addEventListener('cta', function(e) {
-  this.reset(); // Reset the form
+  this.reset(); 
 });
+
+/*pokusaj validacije za login */
+document.getElementById('login-button').addEventListener('click', function(event) {
+  var email = document.getElementById('login-email').value;
+  var password = document.getElementById('login-password').value;
+
+  if(email === '' || password === ''){
+      alert('All fields must be filled out');
+      return;
+  }
+
+  if(!validateEmail(email)) {
+      alert('Invalid email');
+      return;
+  }
+
+  alert('Login Successful');
+});
+
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}

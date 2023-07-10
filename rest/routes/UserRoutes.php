@@ -39,4 +39,43 @@ Flight::route("GET /users", function(){
     echo "Hello from /users route with name = " . $name . " and status = " . $status;
  });
 
+
+ Flight::route('POST /register', function(){
+   $data = Flight::request()->data->getData();
+   Flight::user_service()->register($data);
+   Flight::json(["message" => "User registered successfully"]);
+  
+ });
+
+ Flight::route('POST /user/login', function(){
+   $data = Flight::request()->data->getData();
+   Flight::user_service()->login($data);
+   Flight::json(["message" => "You are logged in"]);
+ });
+ 
+
+ Flight::route('GET /confirm/@token', function($token){
+   Flight::json(Flight::jwt(Flight::userService()->confirm($token)));
+ });
+ 
+
+
+
+
+
+ Flight::route('POST /forgot', function(){
+   $data = Flight::request()->data->getData();
+   Flight::userService()->forgot($data);
+   Flight::json(["message" => "Recovery link has been sent to your email"]);
+ });
+ 
+
+Flight::route('POST /reset', function(){
+   Flight::json(Flight::jwt(Flight::userService()->reset(Flight::request()->data->getData())));
+ });
+
+ 
+ 
+
+
 ?>
